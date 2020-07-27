@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<title>商連單車商活館</title>
+<script type="text/javascript">
+function getData(pagename){
+	var req=new XMLHttpRequest();
+	req.open("get","http://127.0.0.1:8887/%E5%95%86%E9%80%A3%E5%96%AE%E8%BB%8A%E7%94%9F%E6%B4%BB%E9%A4%A8/"+pagename);
+	req.onload=function(){
+		var FirstPagebottomText=document.getElementById("FirstPagebottomText");
+		FirstPagebottomText.innerHTML=this.responseText;
+	};
+	req.send();
+}
+</script>
+<style type="text/css">
+.bodychange{
+	margin:0px;
+	padding:0px;
+	width:auto;
+    height:auto;
+    background-color:#ffffff;
+}
+#Firstbackground{
+	width:auto;
+    height:850px;
+    opacity:1;
+	background-image:url(picture/background/peoplebic.jpg);
+	background-repeat:repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size:cover;
+    text-align:center;
+    padding:10px;
+    margin-bottom:10px;
+}
+#Secondbackground{
+	width:auto;
+    height:850px;
+	background-image:url(picture/background/山-路.jpg);
+	background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size:cover;
+    margin-bottom:10px;
+}
+#Thirdbackground{
+	width:auto;
+    height:850px;
+	background-image:url(picture/background/春-路.jpg);
+	background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size:cover;
+    margin-bottom:10px;
+}
+#Forthbackground{
+	width:auto;
+    height:850px;
+	background-image:url(picture/background/秋-路.jpg);
+	background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size:cover;
+    margin-bottom:10px;
+}
+@keyframes blink{
+	0%{opacity:0}
+	50%{opacity:1}
+	100%{opacity:0}
+}
+.FirstPagebottom{
+	display:flex;
+	margin:50px;
+	height:500px;
+	border:0px;
+	border-radius:50px;
+	background-color:rgba(255,255,255,0.5);
+	justify-content:flex-start;
+	align-items:center;
+	padding-left:200px;
+}
+.FirstTop{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.FirstTop a{
+	text-decoration:none;
+	border:0px;
+}
+.FirstPage1-1{
+	flex:none;
+	width:100px;
+	height:100px;
+	margin:20px;
+	border-radius:50%;
+	background-color:rgba(255,255,255,0.5);
+	line-height:100px;
+	color:#4F4F4F;
+	font-family:"微軟正黑體";
+	font-weight:bold;
+}
+.FirstPage1-1:hover{
+	background-color:rgba(255,255,255,0.3);
+}
+.FirstPage1-1:hover > span{
+	animation:blink 1.5s infinite;
+}
+html{
+	scroll-behavior:smooth;
+}
+</style>
+</head>
+<body class="bodychange" onload="getData('自我介紹.html');">
+	<div id="Firstbackground">
+		<div class="FirstTop">
+			<a href="javascript:void(0);"onclick="getData('自我介紹.html');"><div class="FirstPage1-1"><span>自我介紹</span></div></a>
+			<a href="javascript:void(0);"onclick="getData('營業資訊.html');"><div class="FirstPage1-1"><span>營業資訊</span></div></a>
+			<a href="javascript:void(0);"onclick="getData('聯絡我們.html');"><div class="FirstPage1-1"><span>聯絡我們</span></div></a>
+			<a href="#Secondbackground"><div class="FirstPage1-1"><span>商品資訊</span></div></a>
+			<a href="#Thirdbackground"><div class="FirstPage1-1"><span>最新消息</span></div></a>
+			<a href="#Forthbackground"><div class="FirstPage1-1"><span>照片</span></div></a>
+		</div>
+			<div class="FirstPagebottom">
+				<div id="FirstPagebottomText"></div>
+			</div>
+	</div>
+	<div id="Secondbackground">
+		<div>
+		
+		</div>
+	</div>
+	<div id="Thirdbackground">
+		<div>
+		
+		</div>
+	</div>
+	<div id="Forthbackground">
+		<div>
+		
+		</div>
+	</div>
+</body>
+</html>
