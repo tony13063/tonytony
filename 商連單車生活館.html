@@ -7,7 +7,7 @@
 <script type="text/javascript">
 function getData(pagename){
 	var req=new XMLHttpRequest();
-	req.open("get","http://127.0.0.1:8887/%E5%95%86%E9%80%A3%E5%96%AE%E8%BB%8A%E7%94%9F%E6%B4%BB%E9%A4%A8/"+pagename);
+	req.open("get","https://tony13063.github.io/tonytony/"+pagename);
 	req.onload=function(){
 		var FirstPagebottomText=document.getElementById("FirstPagebottomText");
 		FirstPagebottomText.innerHTML=this.responseText;
