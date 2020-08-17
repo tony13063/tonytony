@@ -11,12 +11,14 @@
 
 <link media="all"/>
 <!--網站圖標-->
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
 <script type="text/javascript">
 /*AJAX*/
 function getData(pagename){
 	var req=new XMLHttpRequest();
-	req.open("get","http://tony13063.github.io/tonytony/"+pagename);
+	req.open("get","http://127.0.0.1:5500/"+pagename);
 	req.onload=function(){
 		var FirstPagebottomText=document.getElementById("PagebottomText");
 		FirstPagebottomText.innerHTML=this.responseText;
