@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
 <script type="text/javascript">
 
 </script>
@@ -13,25 +14,75 @@
 	align-items:center;
 }
 .headimg{
-	width:300px;
+	width:400px;
 	height:300px;
 	border-radius:50%;
 }
-artical{
+article{
 	width:500px;
 	height:300px;
 	border:1px solid;
+	border-width: 3px 4px 3px 6px;
+	border-radius: 90% 6% 93% 5% / 5% 94% 7% 95%;
+	transform: rotate(2deg);
+	background-color:rgba(255,255,255,1);
 	margin:10px;
+	padding:10px;
+	font-family:"微軟正黑體";
+	font-size:20px;
+	position:relative;
+	text-align:left;
+}
+article p{
+	transform: rotate(-2deg);
+}
+strong{
+	text-align:center;
+}
+.importtag{
+	text-align:left;
+	line-height:25px;
+	transform: rotate(-2deg);
+}
+@media(max-width:1200px){
+	.mainTwo{
+		flex-wrap: wrap;
+	}
+	article{
+		background-color:rgba(255,255,255,0.5);
+		width:450px;
+		overflow-y:auto;
+	}
+}
+@media(max-width:600px){
+	.headimg{
+		width:300px;
+		height:225px;
+	}
+	.mainTwo{
+		flex-wrap: wrap;
+	}
+	article{
+		background-color:rgba(255,255,255,0.5);
+		width:280px;
+		overflow-y:auto;
+	}
+
 }
 </style>
 </head>
 <body>
 	<main class="mainTwo">
 		<aside><img src="picture/logo/DadMom.jpeg" class="headimg"></aside>
-		<artical>
-			<h3>40年老店</h3>
-			<h3>親切的態度、專業的技術<h3>
-			<p>老闆從年輕開始就經營著腳踏車店，1234567891231564987</p>
-		</artical>
+		<article>
+			<p>商連單車生活館，10年前，是為商連車行，而在30年前又叫做車行；相信即使是在地人也不一定有聽說過，擁有豐富的自行車知識，以及歲月累積的維修、銷售經驗，能為顧客提供最優質的選擇！
+			</p>
+			<div class="importtag">
+				<strong>#四十餘年老店</strong><br/>
+				<strong>#親切的態度</strong><br/>
+				<strong>#專業的技術</strong>
+			</div>
+		</article>
 	</main>
 </body>
+</html>

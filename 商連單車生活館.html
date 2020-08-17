@@ -3,18 +3,29 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<title>商連單車商活館</title>
+<!--icon套件-->
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<!--網頁說明-->
+<meta name="description" content="我們是捷安特自行車專賣經銷商，專業維修技術，親切服務態度，網站、粉絲專頁不定時公布優惠訊息！" />
+<title>商連單車生活館-捷安特自行車&電動車專賣店</title>
+
 <link media="all"/>
+<!--網站圖標-->
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
 <script type="text/javascript">
+/*AJAX*/
 function getData(pagename){
 	var req=new XMLHttpRequest();
-	req.open("get","https://tony13063.github.io/tonytony/"+pagename);
+	req.open("get","http://127.0.0.1:5500/"+pagename);
 	req.onload=function(){
 		var FirstPagebottomText=document.getElementById("PagebottomText");
 		FirstPagebottomText.innerHTML=this.responseText;
 	};
 	req.send();
 }
+/*選單*/
 function OpenSelect(){
 	var select=document.getElementById("selectText");
 	if(select.style.display=="block"){
@@ -24,26 +35,42 @@ function OpenSelect(){
 	}
 }
 var x;
+x=1;
 function bikestyle(name123){
 	var select=document.getElementById("selectText");
 	var close=document.getElementById("select-a");
+	var atimg=document.getElementById("bikeimg");
+	var attention=document.getElementById("atul");
 	close.innerText=name123;
 	select.style.display="none";
 	if(close.innerText=="公路車"){
-		document.getElementById("bikeimg").src="picture/OnSale/13063-001.jpg";
+		atimg.src="picture/OnSale/13063-001.jpg";
+		atimg.style.filter="brightness(1)";
+		attention.style.display="none";
 		x=1;
 	}else if(close.innerText=="登山車"){
-		document.getElementById("bikeimg").src="picture/OnSale/13063-0018.jpg";
+		atimg.src="picture/OnSale/13063-0018.jpg";
+		atimg.style.filter="brightness(1)";
+		attention.style.display="none";
 		x=18;
-	}else{
-		document.getElementById("bikeimg").src="picture/OnSale/13063.jpeg";
+	}else if(close.innerText=="E+公路車"){
+		atimg.src="picture/OnSale/13063-0022.jpg";
+		atimg.style.filter="brightness(1)";
+		attention.style.display="none";
 		x=22;
+	}else{
+		atimg.src="picture/OnSale/13063.jpeg";
+		atimg.style.filter="brightness(1)";
+		attention.style.display="none";
+		x=23;
 	}
 }
+/*商品選擇*/
 function TurnR(){
 	var name=document.getElementById("select-a");
 	var FR="公路車";
 	var MT="登山車";
+	var EB="E+公路車";
 	var CM="商品";
 	if(name.innerText==FR){
 		if(x<17){
@@ -61,6 +88,14 @@ function TurnR(){
 			x=18;
 			document.getElementById("bikeimg").src="picture/OnSale/13063-00"+x+".jpg";
 		}
+	}else if(name.innerText==EB){
+		if(x<22){
+			x++;
+			document.getElementById("bikeimg").src="picture/OnSale/13063-00"+x+".jpg";
+		}else{
+			x=22;
+			document.getElementById("bikeimg").src="picture/OnSale/13063-00"+x+".jpg";
+		}
 	}else{
 
 	}
@@ -69,6 +104,7 @@ function TurnL(){
 	var name=document.getElementById("select-a");
 	var FR="公路車";
 	var MT="登山車";
+	var EB="E+公路車";
 	var CM="商品";
 	if(name.innerText==FR){
 		if(x<=1){
@@ -86,21 +122,92 @@ function TurnL(){
 			x--;
 			document.getElementById("bikeimg").src="picture/OnSale/13063-00"+x+".jpg";
 		}
+	}else if(name.innerText==EB){
+		if(x<=22){
+			x=22;
+			document.getElementById("bikeimg").src="picture/OnSale/13063-00"+x+".jpg";
+		}else{
+			x--;
+			document.getElementById("bikeimg").src="picture/OnSale/13063-00"+x+".jpg";
+		}
 	}else{
 
 	}
 }
+/*商品資訊*/
 function over(){
+	var close=document.getElementById("select-a");
+	var atimg=document.getElementById("bikeimg");
+	if(close.innerText==""){
+	}else{
 	var bikeinformation=document.getElementsByClassName("bikeinformation")[x-1];
 	bikeinformation.style.display="flex";
+	atimg.style.filter="brightness(0.1)";
+	}
 }
 function out(){
+	var close=document.getElementById("select-a");
+	var atimg=document.getElementById("bikeimg");
+	if(close.innerText==""){
+
+	}else{
 	var bikeinformation=document.getElementsByClassName("bikeinformation")[x-1];
 	bikeinformation.style.display="none";
+	atimg.style.filter="brightness(1)";
+	}
 }
 function gotoinformation(){
+	var close=document.getElementById("select-a");
+	if(close.innerText==""){
+
+	}else{
 	var gotoinfo=document.getElementsByClassName("location")[x-1];
 	window.open(gotoinfo.href);
+	}
+}
+/*商品注意事項*/
+function attention(){
+	var attention=document.getElementById("atul");
+	var close=document.getElementById("select-a");
+	var atimg=document.getElementById("bikeimg");
+	if(close.innerText==""){
+		atimg.style.filter="brightness(0.1)";
+		attention.style.display="block";
+	}else{
+		attention.style.display="none";
+	}
+}
+/*載入完成執行*/
+window.onload=function(){
+	getData('自我介紹.html');
+	attention();
+	sister();
+}
+/*loading 動畫*/
+var y;
+y=0;
+function ONON(){
+		var bar=document.getElementsByClassName("square")[y];
+		bar.style.display="block";
+		y++;
+		if(y=="15"){
+		var loadscroll=document.getElementById("Loading");
+		loadscroll.classList.add("loadscroll");
+		setTimeout(function(){
+			loadscroll.style.display="none";
+		},2000);
+		clearInterval(LOADing);
+		}else{}
+}
+var LOADing=setInterval(ONON,100);
+/*照片輪播換人*/
+function sister(){
+	document.getElementsByClassName("picturebottom")[0].style.display="block";
+	document.getElementsByClassName("picturebottom")[1].style.display="none";
+}
+function brother(){
+	document.getElementsByClassName("picturebottom")[0].style.display="none";
+	document.getElementsByClassName("picturebottom")[1].style.display="block";
 }
 </script>
 <style type="text/css">
@@ -110,21 +217,32 @@ function gotoinformation(){
 	100%{opacity:0}
 }
 @keyframes round {
-    2% {
+    0.66% {
         opacity: 1;
         filter: alpha(opacity=100);
         /* 0 - 1秒 淡入*/
     }
-    10% {
+    3.3% {
         opacity: 1;
         filter: alpha(opacity=100);
         /* 1- 5秒靜止*/
     }
-    12% {
+    3.96%{
         opacity: 0;
         filter: alpha(opacity=0);
         /* 5-6秒淡出*/
     }
+}
+@keyframes numberjump{
+	0%{transform:translate(0px,0px)}
+	25%{transform:translate(0px,-30%)}
+	50%{transform:translate(0px,0px)}
+	100%{transform:translate(0px,0px)}
+}
+@keyframes loadmove{
+	0%{transform: translate(0%,0%)}
+	15%{transform: translate(0%,0%)}
+	100%{transform: translate(0%,-100%)}
 }
 html{
 	scroll-behavior:smooth;
@@ -133,9 +251,10 @@ html{
 	margin:0px;
 	padding:0px;
 	width:auto;
-    height:auto;
+    height:100%;
     background-color:#ffffff;
 }
+/*一、基本訊息*/
 #Firstbackground{
 	width:auto;
     height:850px;
@@ -157,29 +276,23 @@ html{
 	align-items:center;
 	width:100%;
 	height:80px;
-	background-color:rgba(255,255,255,0.5);
+	background-color:rgba(255,255,255,1);
 	font-family:"微軟正黑體";
 	font-weight:bold;
 	position:fixed;
 	top:0%;
-	z-index:1;
+	z-index:2;
 }
 .FirstPage1-1 a{
 	flex:none;
 	text-decoration:none;
 	color:#4F4F4F;
+	z-index:2;
 }
 a:hover > span{
 	animation:blink 1.5s infinite;
 }
-.FirstPage1-1:hover{
-	background-color:rgba(255,255,255,1);
-	z-index:1;
-}
-.NewMessage:hover{
-	background-color:rgba(255,255,255,1);
-	color:#000000;
-}
+/*二、特價商品*/
 #Secondbackground{
 	width:auto;
     height:850px;
@@ -201,6 +314,9 @@ a:hover > span{
 .selectTitle{
 	background-color: rgba(255,255,255,0.5);
 	width:100%;
+	text-align: center;
+	position: relative;
+	z-index:1;
 }
 .selectTitle a{
 	display:block;
@@ -216,6 +332,8 @@ a:hover > span{
 	position: absolute;
 	width:100%;
 	border:0px;
+	text-align: center;
+	z-index:1;
 }
 #selectText a{
 	color:#000000;
@@ -231,91 +349,113 @@ a:hover > span{
 ul{
 	font-size: 1.5rem;
 	font-family:"微軟正黑體";
-	text-align: center;
 	list-style: none;
 	border:0px;
 	margin:0px;
 	padding:0px;
-	text-align:center;
+	text-align:left;
 }
 li{
 	border:0px;
 	margin:0px;
 	padding:0px;
+	line-height:1.6;
+}
+.location{
+	border:1px solid;
+	margin:0px;
+	color:#9F0050;
 }
 #selectText a:hover{
 	background-color:#000000;
 	color:#ffffff;
 }
 #SECPagebottomText{
-	border:0px;
 	width:100%;
 	height:100%;
 	display:flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
 }
 #bikeimg{
 	flex:none;
 	width:100%;
 	height:100%;
+	filter:brightness(1);
 }
 .control-right{
 	display:flex;
 	justify-content: center;
 	align-items: center;
-	width:5%;
-	height:50%;
-	line-height:250px;
-	text-align: center;
-	font-weight: bolder;
-	font-size:30px;
 }
 .control-right a{
-	flex:none;
-	width:100%;
-	height:100%;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	width:100px;
+	height:100px;
 	color:#000000;
+	font-weight: bolder;
 	background-color:rgba(255,255,255,0.5);
+	border-radius:50%;
+	position: absolute;
+	left:95%;
+	top:auto;
 }
-.control-right:hover{
-	background-color:rgba(255,255,255,0.5);
+.control-right a:hover{
+	background-color:rgba(255,255,255,1);
+	border-radius:50%;
 }
 .control-left{
 	display:flex;
 	justify-content: center;
 	align-items: center;
-	width:5%;
-	height:50%;
-	line-height:250px;
-	text-align: center;
-	font-weight: bolder;
-	font-size:30px;
 }
 .control-left a{
-	flex:none;
-	width:100%;
-	height:100%;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	width:100px;
+	height:100px;
 	color:#000000;
 	background-color:rgba(255,255,255,0.5);
+	border-radius:50%;
+	position: absolute;
+	right:95%;
+	top:auto;
 }
-.control-left:hover{
-	background-color:rgba(255,255,255,0.5);
-}
-#bikeimg:hover{
-	filter:brightness(0.1);
+.control-left a:hover{
+	background-color:rgba(255,255,255,1);
+	border-radius:50%;
 }
 .bikeinformation{
 	position:absolute;
 	width:100%;
 	height:100%;
-	text-align: center;
+	text-align:center;
 	display:none;
-	justify-content: center;
+	justify-content:center;
 	align-items: center;
 	color:#ffffff;
 	pointer-events: none;
 }
+/*商品注意事項*/
+#attention{
+	position:absolute;
+	width:100%;
+	height:100%;
+	text-align:center;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	color:#ffffff;
+	pointer-events: none;
+}
+#atul{
+	display:none;
+}
+/*三、最新消息*/
 #Thirdbackground{
 	width:auto;
     height:850px;
@@ -330,7 +470,20 @@ li{
 	align-items:center;
 }
 .fb-page{
-	border:3px solid;
+	border:0px;
+}
+.giantFB{
+	text-align: center;
+	width:100%;
+	height:auto;
+	margin:auto;
+	border:0px;
+	font-family:"微軟正黑體";
+}
+.ThirdtitleText{
+	width:auto;
+	height:auto;
+	border:3px solid #000000;
 }
 .ThirdbottomText{
 	width:auto;
@@ -344,13 +497,20 @@ li{
 	font-family:"微軟正黑體";
 	font-weight:bold;
 }
+.thirdscroll{
+	width:auto;
+	height:250px;
+	overflow-y:auto;
+}
 .Hrstyle{
 	width:auto;
 	height:3px;
 	color:#ffffff;
 	background-color:#ffffff;
 	border:0px;
+	margin:auto;
 }
+/*四、照片輪播*/
 #Forthbackground{
 	width:auto;
     height:850px;
@@ -364,12 +524,21 @@ li{
     justify-content:center;
 	align-items:center;
 }
+#ForthPagebottomText{
+	display:flex;
+	justify-content:center;
+	align-items:flex-start;
+	padding:0px 0px 0px 60px;
+	width:auto;
+	height:auto;
+	position: relative;
+}
 .picturebottom{
 	margin:auto;
     width: 600px;
     height: 450px;
     position: relative;
-    border: 20px solid;    
+    border: 20px solid;
     border-color:#fff;
     border-bottom-width: 100px;
     background-color: #f8f8f8;
@@ -381,19 +550,55 @@ li{
     left:0%;
     opacity:0;/*同下方效果*/
     filter:alpha(opacity=0); /*IE8及更早的版本使用*/
-    animation:round 50s linear infinite;
+    animation:round 150s linear infinite;
 }
 .imginfo{
 	width:600px;
 	height:450px;
 }
-
+.imginfo2{
+	width:600px;
+	height:450px;
+}
+.tagg{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:50px;
+	height:50px;
+	margin:0px 0px 3px 0px;
+	padding:0px 10px 0px 0px;
+	font-size:20px;
+	font-weight: bold;
+	font-family:"微軟正黑體";
+	color:	#444444;
+	border-radius:10px 0px 0px 10px;
+}
+.tagg:nth-child(1){
+	background-color:#00DDAA;
+}
+.tagg:nth-child(2){
+	background-color:#77FFEE;
+}
+.taggbox{
+	padding:0px;
+	margin:0px;
+	border-radius:10px 0px 0px 10px;
+	position: absolute;
+	top:0px;
+	left:10px;
+	border-radius:0px;
+}
+.tagg:hover{
+	transform:translate(-10px,0px);
+}
+/*共用*/
 .Pagebottom{
+	position: relative;
 	display:flex;
 	height:500px;
-	width:60%;
+	width:100%;
 	padding:20px;
-	border-radius:50px;
 	background-color:rgba(255,255,255,0.5);
 	justify-content:center;
 	align-items:center;
@@ -405,7 +610,6 @@ li{
 	padding:50px;
 	width:auto;
 	height:auto;
-	border:1px solid;
 }
 .spacebox{
 	width:100px;
@@ -413,6 +617,7 @@ li{
 a{
 	text-decoration: none;
 }
+/*RWD*/
 @media(min-width:1200px){
 	a{
 		margin:50px;
@@ -421,6 +626,8 @@ a{
 @media(max-width:1200px){
 	.Pagebottom{
 		height:75%;
+		width:75%;
+		background-color:rgba(255,255,255,0);
 	}
 	a{
 		margin:20px;
@@ -433,25 +640,44 @@ a{
 	.logo{
 		display:none;
 	}
+	.control-right a{
+		width:80px;
+		height:80px;
+		left:100%;
+	}
+	.control-left a{
+		width:80px;
+		height:80px;
+		right:100%;
+	}
 	.ThirdbottomText{
 		background-color:rgba(255,255,255,0.5);
 		line-height:20px;
-		font-size:15px;
+		font-size:20px;
 		margin:5px;
 	}
+	.ThirdtitleText{
+		background-color:rgba(255,255,255,0.5);
+	}
 	.ThirdbottomText h1{
-		font-size:15px;
+		font-size:25px;
+	}
+	.ThirdtitleText h1{
+		font-size:25px;
+	}
+	.thirdscroll{
+		height:200px;
+	}
+	.tagg:hover{
+	transform:translate(0px,0px);
 	}
 }
 @media(max-width:600px){
-	.imginfo{
-		width:60%;
-		height:60%;
-	}
-	
 	.Pagebottom{
+		width:80%;
 		height:70%;
 		background-color:rgba(255,255,255,0);
+		flex-wrap: wrap;
 	}
 	a{
 		font-size:80%;
@@ -463,16 +689,85 @@ a{
 	.logo{
 		display:none;
 	}
+	.control-right a{
+		width:50px;
+		height:50px;
+		left:105%;
+	}
+	.control-left a{
+		width:50px;
+		height:50px;
+		right:105%;
+	}
+	#atul{
+		font-size:20px;
+	}
 	.ThirdbottomText{
 		background-color:rgba(255,255,255,0.5);
 		line-height:15px;
-		font-size:10px;
+		font-size:15px;
 		margin:3px;
 	}
+	.ThirdtitleText{
+		background-color:rgba(255,255,255,0.5);
+	}
 	.ThirdbottomText h1{
-		font-size:11px;
+		font-size:20px;
+	}
+	.ThirdtitleText h1{
+		font-size:25px;
+	}
+	.imginfo{
+		width:280px;
+		height:210px;
+	}
+	.imginfo2{
+		width:280px;
+		height:210px;
+	}
+	.thirdscroll{
+		height:150px;
+	}
+	.picturebottom{
+		width:280px;
+		height:210px;
+		border:10px solid;
+		border-bottom-width:50px;
+		border-color:#ffffff;
+		box-shadow: #666 0 0 5px;
+		margin:0px;
+	}
+	.tagg{
+		border-radius:10px 10px 0px 0px;
+		width:30px;
+		height:30px;
+		font-size:12px;
+		margin:0px 3px 0px 0px;
+		padding:0px 0px 5px 0px;
+	}
+	.taggbox{
+		width:100%;
+		padding:0px;
+		margin:0px;
+		display:flex;
+		align-items:flex-start;
+		justify-content:flex-start;
+		position: absolute;
+		top:0px;
+		left:0px;
+	}
+	#ForthPagebottomText{
+		flex-wrap: wrap;
+		padding:0px;
+		width:300px;
+		height:210px;
+		padding:30px 0px 0px 0px;
+	}
+	.tagg:hover{
+	transform:translate(0px,-5px);
 	}
 }
+/*輪播延遲*/
 .picturebottom div:nth-child(1) {
             animation-delay:0s;
 }
@@ -503,9 +798,198 @@ a{
 .picturebottom div:nth-child(10) {
             animation-delay:45s;
 }
+.picturebottom div:nth-child(11) {
+            animation-delay:50s;
+}
+.picturebottom div:nth-child(12) {
+            animation-delay:55s;
+}
+.picturebottom div:nth-child(13) {
+            animation-delay:60s;
+}
+.picturebottom div:nth-child(14) {
+            animation-delay:65s;
+}
+.picturebottom div:nth-child(15) {
+            animation-delay:70s;
+}
+.picturebottom div:nth-child(16) {
+            animation-delay:75s;
+}
+.picturebottom div:nth-child(17) {
+            animation-delay:80s;
+}
+.picturebottom div:nth-child(18) {
+            animation-delay:85s;
+}
+.picturebottom div:nth-child(19) {
+            animation-delay:90s;
+}
+.picturebottom div:nth-child(20) {
+            animation-delay:95s;
+}
+.picturebottom div:nth-child(21) {
+            animation-delay:100s;
+}
+.picturebottom div:nth-child(22) {
+            animation-delay:105s;
+}
+.picturebottom div:nth-child(23) {
+            animation-delay:110s;
+}
+.picturebottom div:nth-child(24) {
+            animation-delay:115s;
+}
+.picturebottom div:nth-child(25) {
+            animation-delay:120s;
+}
+.picturebottom div:nth-child(26) {
+            animation-delay:125s;
+}
+.picturebottom div:nth-child(27) {
+            animation-delay:130s;
+}
+.picturebottom div:nth-child(28) {
+            animation-delay:135s;
+}
+.picturebottom div:nth-child(29) {
+            animation-delay:140s;
+}
+.picturebottom div:nth-child(30) {
+            animation-delay:145s;
+}
+/*loading畫面*/
+#Loading{
+	display:block;
+	position: fixed;
+	top:0%;
+	left:0%;
+	width:100%;
+	height:100%;
+	background-color: #000000;
+	z-index: 5;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+.loadtextanimation{
+	width:auto;
+	height:auto;
+	text-align: center;
+	padding:0px;
+	margin:0px;
+	color:#999999;
+	font-size:50px;
+	font-family:"Roboto";
+}
+.loadtextanimation span{
+	display:inline-block;
+	padding:0px;
+	margin:0px;
+	animation:numberjump 2s infinite;
+}
+.loadscroll{
+	animation:loadmove 2s ease;
+}
+/*loading讀條*/
+.loadbar{
+	color:#999999;
+	font-size:30px;
+	color:#999999;
+	border:2px solid;
+	border-radius:0px;
+	width:300px;
+	height:30px;
+	line-height:30px;
+	padding:5px 10px;
+	margin-top:10px;
+	display:flex;
+	align-items: center;
+	justify-content:flex-start;
+	border-radius:15px;
+}
+.square{
+	display:none;
+	width:20px;
+	height:20px;
+	background-color: #999999;
+}
+/*loading文字動畫延遲*/
+.loadtextanimation span:nth-child(1){
+	animation-delay: 0.1s;
+}
+.loadtextanimation span:nth-child(2) {
+	animation-delay: 0.2s;
+}
+
+.loadtextanimation span:nth-child(3) {
+	animation-delay: 0.3s;
+}
+
+.loadtextanimation span:nth-child(4) {
+	animation-delay: 0.4s;
+}
+
+.loadtextanimation span:nth-child(5) {
+	animation-delay: 0.5s;
+}
+
+.loadtextanimation span:nth-child(6) {
+	animation-delay: 0.6s;
+}
+
+.loadtextanimation span:nth-child(7) {
+	animation-delay: 0.7s;
+}
+
+.loadtextanimation span:nth-child(8) {
+	animation-delay: 0.8s;
+}
+
+.loadtextanimation span:nth-child(9) {
+	animation-delay: 0.9s;
+}
+
+.loadtextanimation span:nth-child(10) {
+	animation-delay: 1s;
+}
 </style>
 </head>
-<body class="bodychange" onload="getData('自我介紹.html');">
+<body class="bodychange">
+<!--loading-->
+	<div id="Loading" class="loadanimation">
+		<div>
+			<div class="loadtextanimation">
+				<span>L</span>
+				<span>o</span>
+				<span>a</span>
+				<span>d</span>
+				<span>i</span>
+				<span>n</span>
+				<span>g</span>
+				<span>.</span>
+				<span>.</span>
+				<span>.</span>
+			</div>
+			<div class="loadbar">
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+				<div class="square"></div>
+			</div>
+		</div>
+	</div>
 
 <div id="fb-root"></div>
 
@@ -528,18 +1012,32 @@ a{
 	</div>
 	
 	<div id="Secondbackground">
+		<!--選單-->
 		<div class="SecondPagebottom">
 				<ul>
-					<li class="selectTitle"><a href="##" onclick="OpenSelect();" id="select-a">=</a></li>
+					<li class="selectTitle"><a href="##" onclick="OpenSelect();" id="select-a"><i class='fas fa-align-justify' style='font-size:24px'></i></a></li>
 					<ul id="selectText">
 						<li><a href="##" onclick="bikestyle('公路車');" id="FR">公路車</a></li>
 						<li><a href="##" onclick="bikestyle('登山車');" id="MT">登山車</a></li>
+						<li><a href="##" onclick="bikestyle('E+公路車');" id="EB">E+公路車</a></li>
 						<li><a href="##" onclick="bikestyle('商品');" id="CM">商品</a></li>
 					</ul>
 				</ul>
+				<!--自行車圖片/資訊-->
 			<div id="SECPagebottomText">
-				<div class="control-left"><a href="##" onclick="TurnL();">＜</a></div>
-				<img src="" id="bikeimg" onmouseover="over();"onmouseout="out();"onclick="gotoinformation();"/>
+				<div class="control-left"><a href="##" onclick="TurnL();"><i class='fas fa-chevron-left' style='font-size:24px'></i></a></div>
+				<img src="picture/others/city.jpg" id="bikeimg" onmouseover="over();"onmouseout="out();"onclick="gotoinformation();" alt="自行車"/>
+				<div class="control-right"><a href="##" onclick="TurnR();"><i class='fas fa-chevron-right' style='font-size:24px'></i></a></div>
+				<!--注意事項-->
+				<div id="attention">
+					<ul id="atul">
+						<li>☆自行車顏色、車況以店內實體商品為準</li>
+						<li>☆多數車款尺寸單一(圖上標註)</li>
+						<li>☆Bonus為部分車款售價不變，額外加贈行車配備(自選)</li>
+						<li>☆特價車款則不額外加贈配備</li>
+						<li>☆歡迎來店賞車，也可於粉絲專頁諮詢相關資訊</li>
+					</ul>
+				</div>
 				<!--特價公路車-->
 				<div class="bikeinformation">
 					<ul>
@@ -548,8 +1046,8 @@ a{
 						<li>尺寸：XS</li>
 						<li>顏色：白</li>
 						<li>原售價：NT 22,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20122530" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -561,8 +1059,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：黑灰橘</li>
 						<li>原售價：NT 39,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價20%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20038827" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -574,8 +1072,8 @@ a{
 						<li>尺寸：M</li>
 						<li>顏色：黃綠色</li>
 						<li>原售價：NT 28,000</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價20%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20038871" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -587,8 +1085,8 @@ a{
 						<li>尺寸：M</li>
 						<li>顏色：藍橘</li>
 						<li>原售價：NT 28,000</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20122261" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -600,8 +1098,8 @@ a{
 						<li>尺寸：XS</li>
 						<li>顏色：黑橘</li>
 						<li>原售價：NT 22,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20122171" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -613,8 +1111,8 @@ a{
 						<li>尺寸：S / M</li>
 						<li>顏色：灰橘</li>
 						<li>原售價：NT 22,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20324808" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -626,8 +1124,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：藍黑</li>
 						<li>原售價：NT 23,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價20%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=2e6db35a-f345-4735-aa36-0a9025573f81" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -639,8 +1137,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：黑藍</li>
 						<li>原售價：NT 32,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價20%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20039821" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -652,8 +1150,8 @@ a{
 						<li>尺寸：XS</li>
 						<li>顏色：粉紅</li>
 						<li>原售價：NT 22,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20323120" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -665,8 +1163,8 @@ a{
 						<li>尺寸：XS</li>
 						<li>顏色：珍珠白</li>
 						<li>原售價：NT 26,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20323081" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -678,8 +1176,8 @@ a{
 						<li>尺寸：XS</li>
 						<li>顏色：黑</li>
 						<li>原售價：NT 45,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20323995" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -691,8 +1189,8 @@ a{
 						<li>尺寸：M</li>
 						<li>顏色：白黑紅</li>
 						<li>原售價：NT 42,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價20%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=eda63dec-dd42-428b-81bb-be87aa8121aa" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -704,8 +1202,8 @@ a{
 						<li>尺寸：M</li>
 						<li>顏色：黑黃</li>
 						<li>原售價：NT 39,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價20%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20039085" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -717,8 +1215,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：紅黑</li>
 						<li>原售價：NT 49,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20119385" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -730,8 +1228,8 @@ a{
 						<li>尺寸：M</li>
 						<li>顏色：黑藍</li>
 						<li>原售價：NT 39,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20119366" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -743,8 +1241,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：黑</li>
 						<li>原售價：NT 59,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20418849" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -756,8 +1254,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：黑銀</li>
 						<li>原售價：NT 45,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：---</li>
+						<li>Bonus：額外加贈原售價15%價錢的商品</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20418850" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -770,8 +1268,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：紅</li>
 						<li>原售價：NT 26,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：NT 21,400 (8折)</li>
+						<li>Bonus：---</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=a350af48-9477-4bf1-a066-c8abb685a30b" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -783,8 +1281,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：白紅</li>
 						<li>原售價：NT 30,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：NT 24,640 (8折)</li>
+						<li>Bonus：---</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=13ddb245-fd9d-4a69-872a-c06d86a1c77e" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -796,8 +1294,8 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：橘</li>
 						<li>原售價：NT 26,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：NT 21,400 (8折)</li>
+						<li>Bonus：---</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20044937" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
@@ -809,30 +1307,56 @@ a{
 						<li>尺寸：S</li>
 						<li>顏色：黑白</li>
 						<li>原售價：NT 39,800</li>
-						<li>特價：</li>
-						<li>Bonus：</li>
+						<li>特價：NT 31,840 (8折)</li>
+						<li>Bonus：---</li>
 						<li>詳細規格：</li>
 						<li><a href="https://www.giantcyclingworld.com/bike.php?id=dbd17590-1c1d-4cef-846d-6ed25d6eef55" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
 					</ul>
 				</div>
+				<!--E+公路車-->
+				<div class="bikeinformation">
+					<ul>
+						<li>型號：FAST E+</li>
+						<li>年度：2018</li>
+						<li>尺寸：S</li>
+						<li>顏色：黑白藍</li>
+						<li>原售價：NT 68,000</li>
+						<li>特價：</li>
+						<li>Bonus：</li>
+						<li>詳細規格：</li>
+						<li><a href="https://www.giantcyclingworld.com/bike.php?id=20113432" target="_blank" class="location">點選頁面跳轉至GIANT官網</a></li>
+					</ul>
+				</div>
 				<!--商品-->
-				<div class="control-right"><a href="##" onclick="TurnR();">＞</a></div>
+				<div class="bikeinformation">
+					<ul>
+						<il>施工中...</il>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
 	
 	<div id="Thirdbackground">
 		<div class="Pagebottom">
-			<div class="fb-page" data-href="https://www.facebook.com/giantcyclingworld" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/giantcyclingworld" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/giantcyclingworld">捷安特自行車</a></blockquote></div>
+			<div class="ThirdtitleText">
+				<h1 class="giantFB">官方粉專</h1>
+				<hr class="Hrstyle"/>
+				<div class="fb-page" data-href="https://www.facebook.com/giantcyclingworld" data-tabs="timeline" data-width="280" data-height="400" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/giantcyclingworld" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/giantcyclingworld">捷安特自行車</a></blockquote></div>
+			</div>
 			<div class="ThirdbottomText">
 				<h1>商連最速報</h1>
 				<hr class="Hrstyle"/>
-				<p>本店收取振興券 / 動滋券</p>
-				<p>[ 振興券 ] 歡迎於2020/12/31日前來店使用！</p>
-				<p>[ 動滋券 ] 歡迎於2020/8/8-2021/1/31期間來店使用</p>
-				<p>振興券 / 動滋券詳細資訊請至下方連結查詢</p>
-				<a href="https://3000.gov.tw/Default.aspx">行政院振興三倍券</a>
-				<a href="https://500.gov.tw/">動滋券</a>
+				<div class="thirdscroll">
+					<p>本店收取振興券 / 動滋券</p>
+					<p>[ 振興券 ] 歡迎於2020/12/31日前來店使用！</p>
+					<p>[ 動滋券 ] 歡迎於2020/8/8-2021/1/31期間來店使用</p>
+					<p>振興券 / 動滋券詳細資訊請至下方連結查詢</p>
+					<p>
+					<a href="https://3000.gov.tw/Default.aspx">行政院振興三倍券</a>
+					<a href="https://500.gov.tw/">動滋券</a>
+					</p>
+				</div>
 				<hr class="Hrstyle"/>
 				<p><a href="https://www.giantcyclingworld.com/news.php" class="Message">捷安特官網</a></p>
 			</div>
@@ -840,46 +1364,142 @@ a{
 	</div>
 	
 	<div id="Forthbackground">
-			<div id="PagebottomText">
+			<div id="ForthPagebottomText">
+				<div class="taggbox">
+					<a href="##" onclick="sister()" class="tagg">大姊</a>
+					<a href="##" onclick="brother()" class="tagg">ㄚ弟</a>
+				</div>
+				<!--大姊-->
 				<div class="picturebottom">
 					<div>
-						<img src="picture/others/13063-001.jpg" class="imginfo"/>
+						<img src="picture/大姊環島2015/day1-啟程前.jpg" class="imginfo"/>
+						<span>1</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day1-出發.jpg" class="imginfo"/>
+						<span>2</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day1-過程.jpg" class="imginfo"/>
+						<span>3</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day2-LIV.jpg" class="imginfo"/>
+						<span>4</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day2-過程.jpg" class="imginfo"/>
+						<span>5</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day3-後壁.jpg" class="imginfo"/>
+						<span>7</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day3-濁水溪.jpg" class="imginfo"/>
+						<span>8</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day3-過程.jpg" class="imginfo"/>
+						<span>9</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day4-啟程.jpg" class="imginfo"/>
+						<span>10</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day4-過程2.jpg" class="imginfo"/>
+						<span>11</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/文案2.jpg" class="imginfo"/>
+						<span>12</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day5-liv.jpg" class="imginfo"/>
+						<span>13</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day5-過程.jpg" class="imginfo"/>
+						<span>14</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day5-過程2.jpg" class="imginfo"/>
+						<span>15</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day6-合照.jpg" class="imginfo"/>
+						<span>16</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day6-過程.jpg" class="imginfo"/>
+						<span>17</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day6-跳.jpg" class="imginfo"/>
+						<span>18</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day6-風景.jpg" class="imginfo"/>
+						<span>19</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day7-過程.jpg" class="imginfo"/>
+						<span>20</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day7-雨.jpg" class="imginfo"/>
+						<span>21</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day7-合照.jpg" class="imginfo"/>
+						<span>22</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day8-過程.jpg" class="imginfo"/>
+						<span>23</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day8-合照.jpg" class="imginfo"/>
+						<span>24</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day8-自然.jpg" class="imginfo"/>
+						<span>25</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day9-過程.jpg" class="imginfo"/>
+						<span>26</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day9-last.jpg" class="imginfo"/>
+						<span>27</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day9-完成.jpg" class="imginfo"/>
+						<span>28</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/day9-結業.jpg" class="imginfo"/>
+						<span>29</span>
+					</div>
+					<div>
+						<img src="picture/大姊環島2015/TOP.jpg" class="imginfo"/>
+						<span>30</span>
+					</div>
+				</div>
+				<!--弟-->
+				<div class="picturebottom">
+					<div>
+						<img src="picture/環島前置訓練/訓練-南鯤鯓.jpg" class="imginfo2"/>
 						<span></span>
 					</div>
 					<div>
-						<img src="picture/others/13063-002.jpg" class="imginfo"/>
+						<img src="picture/環島前置訓練/鹿耳門.jpg" class="imginfo2"/>
 						<span></span>
 					</div>
 					<div>
-						<img src="picture/others/13063-003.jpg" class="imginfo"/>
-						<span></span>
-					</div>
-					<div>
-						<img src="picture/others/13063-004.jpg" class="imginfo"/>
-						<span></span>
-					</div>
-					<div>
-						<img src="picture/others/13063-005.jpg" class="imginfo"/>
-						<span></span>
-					</div>
-					<div>
-						<img src="picture/others/13063-006.jpg" class="imginfo"/>
-						<span></span>
-					</div>
-					<div>
-						<img src="picture/others/13063-007.jpg" class="imginfo"/>
-						<span></span>
-					</div>
-					<div>
-						<img src="picture/others/13063-008.jpg" class="imginfo"/>
-						<span></span>
-					</div>
-					<div>
-						<img src="picture/others/13063-009.jpg" class="imginfo"/>
-						<span></span>
-					</div>
-					<div>
-						<img src="picture/others/13063-0010.jpg" class="imginfo"/>
+						<img src="picture/環島前置訓練/訓練-鹿耳門.jpg" class="imginfo2"/>
 						<span></span>
 					</div>
 				</div>
