@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<!--CSP / https請求-->
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <!--icon套件-->
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <!--網頁說明-->
@@ -19,7 +20,7 @@
 /*AJAX*/
 function getData(pagename){
 	var req=new XMLHttpRequest();
-	req.open("get","http://tony13063.github.io/tonytony/"+pagename);
+	req.open("get","http://127.0.0.1:5500/"+pagename);
 	req.onload=function(){
 		var FirstPagebottomText=document.getElementById("PagebottomText");
 		FirstPagebottomText.innerHTML=this.responseText;
@@ -200,7 +201,7 @@ function ONON(){
 		clearInterval(LOADing);
 		}else{}
 }
-var LOADing=setInterval(ONON,100);
+var LOADing=setInterval(ONON,200);
 /*照片輪播換人*/
 function sister(){
 	document.getElementsByClassName("picturebottom")[0].style.display="block";
@@ -242,7 +243,7 @@ function brother(){
 }
 @keyframes loadmove{
 	0%{transform: translate(0%,0%)}
-	15%{transform: translate(0%,0%)}
+	15%{transform: translate(0%,30px)}
 	100%{transform: translate(0%,-100%)}
 }
 html{
@@ -264,6 +265,9 @@ html{
     background-attachment:fixed;
     background-position:center;
     background-size:cover;
+	-o-background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
     text-align:center;
     padding:0px;
     margin-bottom:10px;
@@ -277,7 +281,7 @@ html{
 	align-items:center;
 	width:100%;
 	height:80px;
-	background-color:rgba(255,255,255,1);
+	background-color:#ffffff;
 	font-family:"微軟正黑體";
 	font-weight:bold;
 	position:fixed;
@@ -302,6 +306,9 @@ a:hover > span{
     background-attachment:fixed;
     background-position:center;
     background-size:cover;
+	-o-background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
     margin-bottom:10px;
     display:flex;
     justify-content:center;
@@ -465,6 +472,9 @@ li{
     background-attachment:fixed;
     background-position:center;
     background-size:cover;
+	-o-background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
     margin-bottom:10px;
     display:flex;
     justify-content:center;
@@ -520,6 +530,9 @@ li{
     background-attachment:fixed;
     background-position:center;
     background-size:cover;
+	-o-background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
     margin-bottom:10px;
     display:flex;
     justify-content:center;
@@ -617,6 +630,25 @@ li{
 }
 a{
 	text-decoration: none;
+}
+footer{
+	margin-top:10px;
+	width:100%;
+	height:50px;
+	background-color: #f8f8f8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.footi{
+	margin:0px;
+	padding:0px 50px 0px 0px;
+	width:auto;
+	height:auto;
+}
+.foottext{
+	margin:0px 0px 0px 10px;
+	color:#696969;
 }
 /*RWD*/
 @media(min-width:1200px){
@@ -767,6 +799,24 @@ a{
 	.tagg:hover{
 	transform:translate(0px,-5px);
 	}
+	footer{
+		flex-wrap: wrap;
+	}
+	.foottext{
+		font-size:12px;
+	}
+	.fas fa-phone{
+		font-size:12px;
+	}
+	.fas fa-mobile-alt{
+		font-size:12px;
+	}
+	.fab fa-facebook-square{
+		font-size:12px;
+	}
+	.far fa-envelope-open{
+		font-size:12px;
+	}
 }
 /*輪播延遲*/
 .picturebottom div:nth-child(1) {
@@ -863,10 +913,10 @@ a{
 #Loading{
 	display:block;
 	position: fixed;
-	top:0%;
+	top:-10%;
 	left:0%;
 	width:100%;
-	height:100%;
+	height:110%;
 	background-color: #000000;
 	z-index: 5;
 	display:flex;
@@ -1506,6 +1556,11 @@ a{
 				</div>
 			</div>
 	</div>
-
+	<footer>
+			<div class="footi"><i class='fas fa-phone' style='font-size:24px;color:#007799'><span class="foottext">06-7232797</span></i></div>
+			<div class="footi"><i class='fas fa-mobile-alt' style='font-size:24px;color:#0088A8'><span class="foottext">0937-305209</span></i></div>
+			<div class="footi"><i class='fab fa-facebook-square' style='font-size:24px;color:#00BBFF'><a href="https://www.facebook.com/giant7232797" class="foottext">商連單車生活館</a></i></div>
+			<div class="footi"><i class='far fa-envelope-open' style='font-size:24px;color:#009FCC'><span class="foottext">fuho7213817@gmail.com</span></i></div>
+	</footer>
 </body>
 </html>
