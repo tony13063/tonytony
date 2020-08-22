@@ -8,8 +8,7 @@
 <!--icon套件-->
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <!--網頁說明-->
-<meta name="google-site-verification" content="我們是捷安特自行車專賣經銷商，專業維修技術，親切服務態度，網站、粉絲專頁不定時公布優惠訊息！" />
-
+<meta name="description" content="我們是捷安特自行車專賣經銷商，專業維修技術，親切服務態度，網站、粉絲專頁不定時公布優惠訊息！" />
 <title>商連單車生活館-捷安特自行車&電動車專賣店</title>
 
 <link media="all"/>
@@ -21,7 +20,7 @@
 /*AJAX*/
 function getData(pagename){
 	var req=new XMLHttpRequest();
-	req.open("get","https://tony13063.github.io/tonytony/"+pagename);
+	req.open("get","http://127.0.0.1:5500/"+pagename);
 	req.onload=function(){
 		var FirstPagebottomText=document.getElementById("PagebottomText");
 		FirstPagebottomText.innerHTML=this.responseText;
@@ -205,7 +204,7 @@ function ONON(){
 var LOADing=setInterval(ONON,200);
 /*照片輪播換人*/
 function sister(){
-	document.getElementsByClassName("picturebottom")[0].style.display="block";
+	document.getElementsByClassName("picturebottom")[0].style.display="block"
 	document.getElementsByClassName("picturebottom")[1].style.display="none";
 }
 function brother(){
@@ -259,7 +258,7 @@ html{
 }
 /*一、基本訊息*/
 #Firstbackground{
-	width:auto;
+	width:100%;
     height:850px;
 	background-image:url(picture/background/peoplebic.jpg);
 	background-repeat:repeat;
@@ -300,7 +299,7 @@ a:hover > span{
 }
 /*二、特價商品*/
 #Secondbackground{
-	width:auto;
+	width:100%;
     height:850px;
 	background-image:url(picture/background/山-路.jpg);
 	background-repeat:no-repeat;
@@ -466,7 +465,7 @@ li{
 }
 /*三、最新消息*/
 #Thirdbackground{
-	width:auto;
+	width:100%;
     height:850px;
 	background-image:url(picture/background/春-路.jpg);
 	background-repeat:no-repeat;
@@ -524,7 +523,7 @@ li{
 }
 /*四、照片輪播*/
 #Forthbackground{
-	width:auto;
+	width:100%;
     height:850px;
 	background-image:url(picture/background/秋-路.jpg);
 	background-repeat:no-repeat;
@@ -633,9 +632,9 @@ a{
 	text-decoration: none;
 }
 footer{
-	margin-top:10px;
+	margin:10px 0px 10px 0px;
 	width:100%;
-	height:50px;
+	height:auto;
 	background-color: #f8f8f8;
 	display: flex;
 	justify-content: center;
@@ -804,19 +803,22 @@ footer{
 		flex-wrap: wrap;
 	}
 	.foottext{
-		font-size:12px;
+		font-size:10px;
+	}
+	.footi{
+		padding:0px 25px 0px 0px;
 	}
 	.fas fa-phone{
-		font-size:12px;
+		font-size:10px;
 	}
 	.fas fa-mobile-alt{
-		font-size:12px;
+		font-size:10px;
 	}
 	.fab fa-facebook-square{
-		font-size:12px;
+		font-size:10px;
 	}
 	.far fa-envelope-open{
-		font-size:12px;
+		font-size:10px;
 	}
 }
 /*輪播延遲*/
@@ -971,39 +973,39 @@ footer{
 	animation-delay: 0.1s;
 }
 .loadtextanimation span:nth-child(2) {
-	animation-delay: 0.2s;
+	animation-delay: 0.25s;
 }
 
 .loadtextanimation span:nth-child(3) {
-	animation-delay: 0.3s;
-}
-
-.loadtextanimation span:nth-child(4) {
 	animation-delay: 0.4s;
 }
 
+.loadtextanimation span:nth-child(4) {
+	animation-delay: 0.55s;
+}
+
 .loadtextanimation span:nth-child(5) {
-	animation-delay: 0.5s;
-}
-
-.loadtextanimation span:nth-child(6) {
-	animation-delay: 0.6s;
-}
-
-.loadtextanimation span:nth-child(7) {
 	animation-delay: 0.7s;
 }
 
+.loadtextanimation span:nth-child(6) {
+	animation-delay: 0.85s;
+}
+
+.loadtextanimation span:nth-child(7) {
+	animation-delay: 1s;
+}
+
 .loadtextanimation span:nth-child(8) {
-	animation-delay: 0.8s;
+	animation-delay: 1.15s;
 }
 
 .loadtextanimation span:nth-child(9) {
-	animation-delay: 0.9s;
+	animation-delay: 1.3s;
 }
 
 .loadtextanimation span:nth-child(10) {
-	animation-delay: 1s;
+	animation-delay: 1.45s;
 }
 </style>
 </head>
@@ -1049,11 +1051,9 @@ footer{
 
 	<div id="Firstbackground">
 		<header class="FirstPage1-1">
-			<a href="http://127.0.0.1:8887/%E5%95%86%E9%80%A3%E5%96%AE%E8%BB%8A%E7%94%9F%E6%B4%BB%E9%A4%A8/%E5%95%86%E9%80%A3%E5%96%AE%E8%BB%8A%E7%94%9F%E6%B4%BB%E9%A4%A8.html">
 			</a>
 			<a href="#" onclick="getData('自我介紹.html');"><span>自我介紹</span></a>
 			<a href="#" onclick="getData('營業資訊.html');"><span>營業資訊</span></a>
-			<a href="#" onclick="getData('聯絡我們.html');"><span>聯絡我們</span></a>
 			<a href="#Secondbackground"><span>特價商品</span></a>
 			<a href="#Thirdbackground"><span>最新消息</span></a>
 			<a href="#Forthbackground"><span>照片</span></a>
@@ -1558,10 +1558,10 @@ footer{
 			</div>
 	</div>
 	<footer>
-			<div class="footi"><i class='fas fa-phone' style='font-size:24px;color:#007799'><span class="foottext">06-7232797</span></i></div>
-			<div class="footi"><i class='fas fa-mobile-alt' style='font-size:24px;color:#0088A8'><span class="foottext">0937-305209</span></i></div>
-			<div class="footi"><i class='fab fa-facebook-square' style='font-size:24px;color:#00BBFF'><a href="https://www.facebook.com/giant7232797" class="foottext">商連單車生活館</a></i></div>
-			<div class="footi"><i class='far fa-envelope-open' style='font-size:24px;color:#009FCC'><span class="foottext">fuho7213817@gmail.com</span></i></div>
+			<div class="footi"><i class='fas fa-phone' style='font-size:20px;color:#007799'><span class="foottext">06-7232797</span></i></div>
+			<div class="footi"><i class='fas fa-mobile-alt' style='font-size:20px;color:#0088A8'><span class="foottext">0937-305209</span></i></div>
+			<div class="footi"><i class='fab fa-facebook-square' style='font-size:20px;color:#00BBFF'><a href="https://www.facebook.com/giant7232797" class="foottext">商連單車生活館</a></i></div>
+			<div class="footi"><i class='far fa-envelope-open' style='font-size:20px;color:#009FCC'><span class="foottext">fuho7213817@gmail.com</span></i></div>
 	</footer>
 </body>
 </html>
